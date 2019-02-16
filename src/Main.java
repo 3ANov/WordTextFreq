@@ -1,7 +1,9 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
@@ -19,26 +21,24 @@ public class Main {
         BufferedReader bf = new BufferedReader(inRead);
 
 
+
+
         String s = bf.readLine();
-        TreeMap<Integer,String> words = new TreeMap<>();
-        Stream.of(s.split("[^A-Za-zА-Яа-я0-9]+"))
+        Map<String, Long> words = Stream.of(s.split("[^A-Za-zА-Яа-я0-9]+"))
                 .map(String::toLowerCase)
+                .collect(
+                        Collectors.groupingBy(Object::toString,Collectors.counting()));
                 //.distinct()
                 //.sorted()
-                .forEach((x)->{
-                    words.put(+1,x);
-                });
+        for(String word:words.keySet()){
+            System.out.println(word + " - " + words.get(word));
+        }
+
 
 
        // words.putIfAbsent()
 
-        for(Map.Entry e : words.entrySet()){
 
-
-
-            System.out.println(e.getKey()+" "+ e.getValue());
-
-        }
 
     }
 
