@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,14 +23,20 @@ public class Main {
         String s = bf.readLine();
         Map<String, Long> words = Stream.of(s.split("[^A-Za-zА-Яа-я0-9]+"))
                 .map(String::toLowerCase)
-                .collect(
-                        Collectors.groupingBy(Object::toString,Collectors.counting()));
+                .collect(Collectors.groupingBy(Object::toString,Collectors.counting()));
                 //.distinct()
                 //.sorted()
+
+        //HashMap<String, Long> map = new HashMap<String, Long>();
+        words.entrySet().stream()
+                .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+                
+                .forEach(System.out::println);
+        /*
         for(String word:words.keySet()){
             System.out.println(word + " - " + words.get(word));
         }
-
+        */
 
 
        // words.putIfAbsent()
